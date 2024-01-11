@@ -22,6 +22,7 @@ class LoginView extends GetView<LoginController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                width: double.infinity,
                 decoration: const BoxDecoration(
                     color: PrimaryColors.light,
                     borderRadius: BorderRadius.only(
