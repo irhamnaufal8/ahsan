@@ -1,3 +1,4 @@
+import 'package:ahsan/common/router/app_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -22,6 +23,6 @@ class LoginController extends GetxController {
   }
 
   void toHome() {
-    Get.toNamed('/home');
+    Get.toNamed(Routes.BOTTOM_NAVIGATION_BAR);
   }
 }
