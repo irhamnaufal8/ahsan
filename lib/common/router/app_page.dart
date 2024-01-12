@@ -4,6 +4,8 @@ import 'package:ahsan/feature/home/bindings/home_binding.dart';
 import 'package:ahsan/feature/home/views/home_view.dart';
 import 'package:ahsan/feature/login/bindings/login_binding.dart';
 import 'package:ahsan/feature/login/views/login_view.dart';
+import 'package:ahsan/feature/present/bindings/present_binding.dart';
+import 'package:ahsan/feature/present/views/present_view.dart';
 import 'package:get/get.dart';
 
 class AppPages {
@@ -27,6 +29,11 @@ class AppPages {
       page: () => const BottomNavigationBarView(),
       binding: BottomNavigationBarBinding(),
     ),
+    GetPage(
+      name: _Path.PRESENT,
+      page: () => const PresentView(),
+      binding: PresentBinding(),
+    ),
   ];
 }
 
@@ -35,6 +42,7 @@ abstract class Routes {
   static const LOGIN = _Path.LOGIN;
   static const HOME = _Path.HOME;
   static const BOTTOM_NAVIGATION_BAR = _Path.BOTTOM_NAVIGATION_BAR;
+  static const PRESENT = _Path.PRESENT;
 }
 
 abstract class _Path {
@@ -42,4 +50,5 @@ abstract class _Path {
   static const LOGIN = '/login';
   static const HOME = '/home';
   static const BOTTOM_NAVIGATION_BAR = '/bottom-navigation-bar';
+  static const PRESENT = '/present';
 }

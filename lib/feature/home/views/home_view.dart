@@ -232,7 +232,7 @@ class HomeView extends GetView<HomeController> {
                   menuIcon(
                       'Materi', Icons.checklist, AccentColors.orange, () {}),
                   menuIcon('Presensi', Icons.qr_code_scanner,
-                      AccentColors.purple, () {})
+                      AccentColors.purple, controller.toPresnet)
                 ],
               ),
             )
