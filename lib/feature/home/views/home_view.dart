@@ -24,6 +24,7 @@ class HomeView extends GetView<HomeController> {
           child: Column(
             children: [
               headContent(),
+              menuContent(),
             ],
           ),
         ),
@@ -203,6 +204,63 @@ class HomeView extends GetView<HomeController> {
                 ),
               ],
             )
+          ],
+        ));
+  }
+
+  Widget menuContent() {
+    return Container(
+        margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Menu',
+              style: Poppins.bold(16),
+            ),
+            const SizedBox(
+              height: 14,
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              width: 320,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  menuIcon('Doa Harian', Icons.auto_stories,
+                      PrimaryColors.primary, () {}),
+                  menuIcon(
+                      'Materi', Icons.checklist, AccentColors.orange, () {}),
+                  menuIcon('Presensi', Icons.qr_code_scanner,
+                      AccentColors.purple, () {})
+                ],
+              ),
+            )
+          ],
+        ));
+  }
+
+  Widget menuIcon(String text, IconData icon, Color color, Function() onTap) {
+    return TextButton(
+        onPressed: onTap,
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(
+                icon,
+                color: Colors.white,
+                size: 28,
+              ),
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            Text(text, style: Poppins.medium(12))
           ],
         ));
   }
