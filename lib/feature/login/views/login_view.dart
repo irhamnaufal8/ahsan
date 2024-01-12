@@ -102,7 +102,7 @@ class LoginView extends GetView<LoginController> {
                       top: Get.height * 0.15, left: 20, right: 20),
                   child: PrimaryButton(
                     text: 'Masuk',
-                    onTap: () {},
+                    onTap: controller.toHome,
                   ).animate().fadeIn())
             ],
           ),

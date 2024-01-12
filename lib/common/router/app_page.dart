@@ -1,3 +1,5 @@
+import 'package:ahsan/feature/home/bindings/home_binding.dart';
+import 'package:ahsan/feature/home/views/home_view.dart';
 import 'package:ahsan/feature/login/bindings/login_binding.dart';
 import 'package:ahsan/feature/login/views/login_view.dart';
 import 'package:get/get.dart';
@@ -13,15 +15,22 @@ class AppPages {
       page: () => const LoginView(),
       binding: LoginBinding(),
     ),
+    GetPage(
+      name: _Path.HOME,
+      page: () => const HomeView(),
+      binding: HomeBinding(),
+    ),
   ];
 }
 
 abstract class Routes {
   Routes._();
   static const LOGIN = _Path.LOGIN;
+  static const HOME = _Path.HOME;
 }
 
 abstract class _Path {
   _Path._();
   static const LOGIN = '/login';
+  static const HOME = '/home';
 }

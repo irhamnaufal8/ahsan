@@ -20,4 +20,8 @@ class LoginController extends GetxController {
       throw Exception('Could not launch $url');
     }
   }
+
+  void toHome() {
+    Get.toNamed('/home');
+  }
 }
