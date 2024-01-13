@@ -1,4 +1,5 @@
 import 'package:ahsan/feature/home/controllers/home_controller.dart';
+import 'package:ahsan/feature/news/controller/news_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ahsan/common/resource/colors.dart';
 import 'package:ahsan/feature/bottom_navigation_bar/controllers/bottom_navigation_bar_controller.dart';
@@ -9,6 +10,7 @@ class BottomNavigationBarView extends GetView<BottomNavigationBarController> {
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
+    Get.put(NewsController());
     Get.put(BottomNavigationBarController(), permanent: true);
 
     return GetBuilder<BottomNavigationBarController>(builder: (_) {
@@ -29,6 +31,10 @@ class BottomNavigationBarView extends GetView<BottomNavigationBarController> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Beranda',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.newspaper),
+                label: 'Berita',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),

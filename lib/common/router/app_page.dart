@@ -4,6 +4,8 @@ import 'package:ahsan/feature/home/bindings/home_binding.dart';
 import 'package:ahsan/feature/home/views/home_view.dart';
 import 'package:ahsan/feature/login/bindings/login_binding.dart';
 import 'package:ahsan/feature/login/views/login_view.dart';
+import 'package:ahsan/feature/news/bindings/news_binding.dart';
+import 'package:ahsan/feature/news/views/news_view.dart';
 import 'package:ahsan/feature/present/bindings/present_binding.dart';
 import 'package:ahsan/feature/present/views/present_view.dart';
 import 'package:get/get.dart';
@@ -34,6 +36,11 @@ class AppPages {
       page: () => const PresentView(),
       binding: PresentBinding(),
     ),
+    GetPage(
+      name: _Path.NEWS,
+      page: () => const NewsView(),
+      binding: NewsBinding(),
+    ),
   ];
 }
 
@@ -43,6 +50,7 @@ abstract class Routes {
   static const HOME = _Path.HOME;
   static const BOTTOM_NAVIGATION_BAR = _Path.BOTTOM_NAVIGATION_BAR;
   static const PRESENT = _Path.PRESENT;
+  static const NEWS = _Path.NEWS;
 }
 
 abstract class _Path {
@@ -51,4 +59,5 @@ abstract class _Path {
   static const HOME = '/home';
   static const BOTTOM_NAVIGATION_BAR = '/bottom-navigation-bar';
   static const PRESENT = '/present';
+  static const NEWS = '/news';
 }
