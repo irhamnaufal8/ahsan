@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ahsan/common/router/app_page.dart';
 import 'package:get/get.dart';
 import 'package:ahsan/common/model/enum/doa.dart';
 
@@ -9,6 +10,6 @@ class DoaListController extends GetxController {
 
   void toDoaDetail(int index) {
     DoaEnum doa = doaList[index];
-    debugPrint(doa.title);
+    Get.toNamed(Routes.DOA_DETAIL, arguments: {'doa': doa});
   }
 }
