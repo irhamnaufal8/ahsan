@@ -228,9 +228,8 @@ class HomeView extends GetView<HomeController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   menuIcon('Doa Harian', Icons.auto_stories,
-                      PrimaryColors.primary, () {}),
-                  menuIcon(
-                      'Materi', Icons.checklist, AccentColors.orange, () {}),
+                      PrimaryColors.primary, controller.toDoaList),
+                  menuIcon('Adab', Icons.thumb_up, AccentColors.orange, () {}),
                   menuIcon('Presensi', Icons.qr_code_scanner,
                       AccentColors.purple, controller.toPresnet)
                 ],

@@ -11,6 +11,7 @@ class PrimaryTextField extends StatelessWidget {
   final String? Function(String? value)? onChange;
   final void Function()? onEditingComplete;
   final FocusNode? focusNode;
+  final IconData? trailingIcon;
 
   const PrimaryTextField({
     Key? key,
@@ -22,6 +23,7 @@ class PrimaryTextField extends StatelessWidget {
     this.onChange,
     this.onEditingComplete,
     this.focusNode,
+    this.trailingIcon,
   }) : super(key: key);
 
   @override
@@ -36,18 +38,27 @@ class PrimaryTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: placeholder,
         hintStyle: Poppins.medium(14, color: MonoColors.gray1),
-        suffixIcon: isObsecure != null
-            ? GestureDetector(
-                onTap: showPassword,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Icon(
-                    isObsecure! ? Icons.visibility_off : Icons.visibility,
-                    color: MonoColors.gray1,
-                  ),
+        suffixIcon: trailingIcon != null
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Icon(
+                  trailingIcon,
+                  color: MonoColors.gray1,
+                  size: 24,
                 ),
               )
-            : null,
+            : (isObsecure != null
+                ? GestureDetector(
+                    onTap: showPassword,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Icon(
+                        isObsecure! ? Icons.visibility_off : Icons.visibility,
+                        color: MonoColors.gray1,
+                      ),
+                    ),
+                  )
+                : null),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(

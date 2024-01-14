@@ -5,4 +5,8 @@ class HomeController extends GetxController {
   void toPresnet() {
     Get.toNamed(Routes.PRESENT);
   }
+
+  void toDoaList() {
+    Get.toNamed(Routes.DOA_LIST);
+  }
 }

@@ -1,5 +1,7 @@
 import 'package:ahsan/feature/bottom_navigation_bar/bindings/bottom_navigation_bar_binding.dart';
 import 'package:ahsan/feature/bottom_navigation_bar/views/bottom_navigation_bar_view.dart';
+import 'package:ahsan/feature/doa/bindings/doa_list_binding.dart';
+import 'package:ahsan/feature/doa/views/doa_list_view.dart';
 import 'package:ahsan/feature/home/bindings/home_binding.dart';
 import 'package:ahsan/feature/home/views/home_view.dart';
 import 'package:ahsan/feature/login/bindings/login_binding.dart';
@@ -41,6 +43,11 @@ class AppPages {
       page: () => const NewsView(),
       binding: NewsBinding(),
     ),
+    GetPage(
+      name: _Path.DOA_LIST,
+      page: () => const DoaListView(),
+      binding: DoaListBinding(),
+    ),
   ];
 }
 
@@ -51,6 +58,7 @@ abstract class Routes {
   static const BOTTOM_NAVIGATION_BAR = _Path.BOTTOM_NAVIGATION_BAR;
   static const PRESENT = _Path.PRESENT;
   static const NEWS = _Path.NEWS;
+  static const DOA_LIST = _Path.DOA_LIST;
 }
 
 abstract class _Path {
@@ -60,4 +68,5 @@ abstract class _Path {
   static const BOTTOM_NAVIGATION_BAR = '/bottom-navigation-bar';
   static const PRESENT = '/present';
   static const NEWS = '/news';
+  static const DOA_LIST = '/doa-list';
 }
