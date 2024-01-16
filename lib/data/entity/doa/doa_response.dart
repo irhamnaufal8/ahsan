@@ -22,4 +22,14 @@ class DoaItem {
       keutamaan: json['keutamaan'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'judul': judul,
+      'arab': arab,
+      'latin': latin,
+      'arti': arti,
+      'keutamaan': keutamaan,
+    };
+  }
 }

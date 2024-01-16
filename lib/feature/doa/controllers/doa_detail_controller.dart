@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ahsan/common/model/doa/doa_model.dart';
-import 'package:ahsan/common/model/enum/doa.dart';
+import 'package:ahsan/data/entity/doa/doa_response.dart';
+import 'package:ahsan/common/enum/doa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

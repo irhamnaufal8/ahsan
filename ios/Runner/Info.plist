@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationDefaultAccuracyReduced</key>
+	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Ahsan perlu mengakses lokasi untuk menentukan waktu sholat</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Ahsan perlu mengakses lokasi untuk menentukan waktu sholat</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -26,6 +32,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Ahsan perlu mengakses kamera untuk melakukan scan qr code saat presensi</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Ahsan perlu mengakses lokasi untuk menentukan waktu sholat</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Ahsan perlu mengakses lokasi untuk menentukan waktu sholat.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

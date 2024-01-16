@@ -1,6 +1,6 @@
 import 'package:ahsan/common/extension/string_or_empty.dart';
-import 'package:ahsan/common/model/doa/doa_model.dart';
-import 'package:ahsan/common/model/enum/doa.dart';
+import 'package:ahsan/data/entity/doa/doa_response.dart';
+import 'package:ahsan/common/enum/doa.dart';
 import 'package:ahsan/common/resource/colors.dart';
 import 'package:ahsan/common/resource/fonts.dart';
 import 'package:flutter/material.dart';

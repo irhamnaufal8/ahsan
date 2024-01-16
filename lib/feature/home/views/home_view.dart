@@ -229,7 +229,8 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   menuIcon('Doa Harian', Icons.auto_stories,
                       PrimaryColors.primary, controller.toDoaList),
-                  menuIcon('Adab', Icons.thumb_up, AccentColors.orange, () {}),
+                  menuIcon('Adab', Icons.thumb_up, AccentColors.orange,
+                      controller.getUserLocation),
                   menuIcon('Presensi', Icons.qr_code_scanner,
                       AccentColors.purple, controller.toPresnet)
                 ],

@@ -1,5 +1,5 @@
 import 'package:ahsan/common/component/input_field/primary_text_field.dart';
-import 'package:ahsan/common/model/enum/doa.dart';
+import 'package:ahsan/common/enum/doa.dart';
 import 'package:flutter/material.dart';
 import 'package:ahsan/common/resource/colors.dart';
 import 'package:ahsan/common/resource/fonts.dart';

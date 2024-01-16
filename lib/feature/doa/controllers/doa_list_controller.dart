@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ahsan/common/router/app_page.dart';
 import 'package:get/get.dart';
-import 'package:ahsan/common/model/enum/doa.dart';
+import 'package:ahsan/common/enum/doa.dart';
 
 class DoaListController extends GetxController {
   TextEditingController searchController = TextEditingController();
