@@ -3,6 +3,7 @@ import 'package:ahsan/common/resource/fonts.dart';
 import 'package:ahsan/common/resource/gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:ahsan/feature/home/controllers/home_controller.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -20,7 +21,9 @@ class HomeView extends GetView<HomeController> {
           leadingWidth: double.infinity,
           leading: topBar(),
         ),
+        backgroundColor: PrimaryColors.light,
         body: RefreshIndicator(
+          color: PrimaryColors.primary,
           onRefresh: controller.getUserLocation,
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -28,9 +31,6 @@ class HomeView extends GetView<HomeController> {
               children: [
                 headContent(),
                 menuContent(),
-                const SizedBox(
-                  height: 300,
-                )
               ],
             ),
           ),
@@ -52,21 +52,24 @@ class HomeView extends GetView<HomeController> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        controller.prayerTitle,
-                        style: Poppins.bold(18, color: MonoColors.black1),
-                      ),
-                      Text(
-                        controller.prayerDesc.isEmpty
-                            ? ''
-                            : 'Sampai dengan ${controller.prayerDesc}',
-                        style: Poppins.medium(14, color: MonoColors.black2),
-                      ),
-                    ],
+                    children: controller.isPrayerLoading
+                        ? prayerLoading()
+                        : [
+                            Text(
+                              controller.prayerTitle,
+                              style: Poppins.bold(18, color: MonoColors.black1),
+                            ),
+                            controller.prayerDesc.isEmpty
+                                ? const SizedBox(height: 0)
+                                : Text(
+                                    'sampai dengan ${controller.prayerDesc}',
+                                    style: Poppins.medium(14,
+                                        color: MonoColors.black2),
+                                  ),
+                          ],
                   )),
             ),
-          ),
+          ).animate().fadeIn(),
           Container(
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
@@ -83,6 +86,28 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
     );
+  }
+
+  List<Widget> prayerLoading() {
+    return [
+      Container(
+        width: 70,
+        height: 20,
+        decoration: BoxDecoration(
+            color: MonoColors.gray2.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(4)),
+      ).animate().fadeIn(),
+      const SizedBox(
+        height: 4,
+      ),
+      Container(
+        width: 160,
+        height: 20,
+        decoration: BoxDecoration(
+            color: MonoColors.gray2.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(4)),
+      ).animate().fadeIn(),
+    ];
   }
 
   Widget headContent() {
@@ -219,7 +244,10 @@ class HomeView extends GetView<HomeController> {
 
   Widget menuContent() {
     return Container(
-        margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+        ),
+        padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -243,6 +271,9 @@ class HomeView extends GetView<HomeController> {
                       AccentColors.purple, controller.toPresnet)
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 300,
             )
           ],
         ));

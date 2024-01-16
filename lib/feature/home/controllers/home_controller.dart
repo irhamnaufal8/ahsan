@@ -12,10 +12,11 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class HomeController extends GetxController {
-  String prayerTitle = '';
+  String prayerTitle = 'Jadwal Sholat';
   String prayerDesc = '';
   late Position userPosition;
   late PrayerTimingResponse prayerTime;
+  bool isPrayerLoading = false;
 
   @override
   void onInit() {
@@ -66,6 +67,8 @@ class HomeController extends GetxController {
   }
 
   Future<void> getPrayerTime(Position position) async {
+    isPrayerLoading = true;
+    update();
     try {
       final DateTime now = DateTime.now();
       final formatedDate = '${now.day}-${now.month}-${now.year}';
@@ -76,7 +79,8 @@ class HomeController extends GetxController {
         Uri.parse('http://api.aladhan.com/v1/timings/$formatedDate')
             .replace(queryParameters: param.toJson()),
       );
-      debugPrint('Response: ${response.body}');
+      isPrayerLoading = false;
+      update();
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final Map<String, dynamic> data = jsonDecode(response.body);
@@ -113,8 +117,8 @@ class HomeController extends GetxController {
         prayerTitle = 'Subuh';
         prayerDesc = timings.fajr ?? '-';
       } else if (now.isAfter(sunrise) && now.isBefore(dhuhr)) {
-        prayerTitle = '-';
-        prayerDesc = timings.dhuhr ?? '-';
+        prayerTitle = 'Jadwal Sholat';
+        prayerDesc = '';
       } else if (now.isAfter(dhuhr) && now.isBefore(asr)) {
         prayerTitle = 'Dzuhur';
         prayerDesc = timings.asr ?? '-';
@@ -122,13 +126,10 @@ class HomeController extends GetxController {
         prayerTitle = 'Ashar';
         prayerDesc = timings.maghrib ?? '-';
       } else if (now.isAfter(sunset) && now.isBefore(maghrib)) {
-        prayerTitle = '';
+        prayerTitle = 'Jadwal Sholat';
         prayerDesc = '';
       } else if (now.isAfter(maghrib) && now.isBefore(isha)) {
         prayerTitle = 'Magrib';
-        prayerDesc = '';
-      } else if (now.isAfter(isha)) {
-        prayerTitle = 'Isya';
         prayerDesc = '';
       } else {
         prayerTitle = 'Isya';
