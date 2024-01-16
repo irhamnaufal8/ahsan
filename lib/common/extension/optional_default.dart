@@ -3,3 +3,9 @@ extension StringExtension on String? {
     return this ?? '';
   }
 }
+
+extension IntExtension on int? {
+  int orZero() {
+    return this ?? 0;
+  }
+}

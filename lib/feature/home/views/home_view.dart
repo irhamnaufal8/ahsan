@@ -20,12 +20,19 @@ class HomeView extends GetView<HomeController> {
           leadingWidth: double.infinity,
           leading: topBar(),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              headContent(),
-              menuContent(),
-            ],
+        body: RefreshIndicator(
+          onRefresh: controller.getUserLocation,
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                headContent(),
+                menuContent(),
+                const SizedBox(
+                  height: 300,
+                )
+              ],
+            ),
           ),
         ),
       );
@@ -47,11 +54,13 @@ class HomeView extends GetView<HomeController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Dzuhur',
+                        controller.prayerTitle,
                         style: Poppins.bold(18, color: MonoColors.black1),
                       ),
                       Text(
-                        'Sisa 2 jam 30 menit lagi',
+                        controller.prayerDesc.isEmpty
+                            ? ''
+                            : 'Sampai dengan ${controller.prayerDesc}',
                         style: Poppins.medium(14, color: MonoColors.black2),
                       ),
                     ],
@@ -229,8 +238,7 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   menuIcon('Doa Harian', Icons.auto_stories,
                       PrimaryColors.primary, controller.toDoaList),
-                  menuIcon('Adab', Icons.thumb_up, AccentColors.orange,
-                      controller.getUserLocation),
+                  menuIcon('Adab', Icons.thumb_up, AccentColors.orange, () {}),
                   menuIcon('Presensi', Icons.qr_code_scanner,
                       AccentColors.purple, controller.toPresnet)
                 ],

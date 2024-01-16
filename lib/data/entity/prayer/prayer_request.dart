@@ -1,20 +1,19 @@
 class PrayerRequest {
-  final DateTime date;
   final double latitude;
   final double longitude;
+  final int method;
 
   PrayerRequest({
-    DateTime? date,
     required this.latitude,
     required this.longitude,
-  }) : date = date ?? DateTime.now();
+    int? method,
+  }) : method = method ?? 20;
 
   Map<String, dynamic> toJson() {
-    final formatedDate = '${date.day}-${date.month}-${date.year}';
     return {
-      'date': formatedDate,
-      'latitude': latitude,
-      'longitude': longitude,
+      'latitude': latitude.toString(),
+      'longitude': longitude.toString(),
+      'method': method.toString(),
     };
   }
 }
