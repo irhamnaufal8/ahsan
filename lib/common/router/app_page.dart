@@ -10,6 +10,8 @@ import 'package:ahsan/feature/login/bindings/login_binding.dart';
 import 'package:ahsan/feature/login/views/login_view.dart';
 import 'package:ahsan/feature/news/bindings/news_binding.dart';
 import 'package:ahsan/feature/news/views/news_view.dart';
+import 'package:ahsan/feature/prayer/bindings/prayer_binding.dart';
+import 'package:ahsan/feature/prayer/views/prayer_view.dart';
 import 'package:ahsan/feature/present/bindings/present_binding.dart';
 import 'package:ahsan/feature/present/views/present_view.dart';
 import 'package:get/get.dart';
@@ -55,6 +57,11 @@ class AppPages {
       page: () => const DoaDetailView(),
       binding: DoaDetailBinding(),
     ),
+    GetPage(
+      name: _Path.PRAYER,
+      page: () => const PrayerView(),
+      binding: PrayerBinding(),
+    ),
   ];
 }
 
@@ -67,6 +74,7 @@ abstract class Routes {
   static const NEWS = _Path.NEWS;
   static const DOA_LIST = _Path.DOA_LIST;
   static const DOA_DETAIL = _Path.DOA_DETAIL;
+  static const PRAYER = _Path.PRAYER;
 }
 
 abstract class _Path {
@@ -78,4 +86,5 @@ abstract class _Path {
   static const NEWS = '/news';
   static const DOA_LIST = '/doa-list';
   static const DOA_DETAIL = '/doa-detail';
+  static const PRAYER = '/prayer';
 }

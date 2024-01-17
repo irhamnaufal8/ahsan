@@ -48,7 +48,7 @@ class HomeView extends GetView<HomeController> {
             child: Container(
               alignment: Alignment.centerLeft,
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: controller.toPrayer,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -32,7 +32,7 @@ class MonoColors {
 
   static const Color gray1 = Color.fromRGBO(126, 128, 138, 1);
   static const Color gray2 = Color.fromRGBO(218, 223, 231, 1);
-  static const Color gray3 = Color.fromRGBO(246, 246, 246, 1);
+  static const Color gray3 = Color.fromRGBO(242, 242, 242, 1);
 
   static const Color background = Color.fromRGBO(247, 249, 253, 1);
 }

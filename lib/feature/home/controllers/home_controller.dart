@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ahsan/common/component/alert/snackbar.dart';
+import 'package:ahsan/common/enum/prayer.dart';
 import 'package:ahsan/common/router/app_page.dart';
 import 'package:ahsan/data/entity/prayer/prayer_request.dart';
 import 'package:ahsan/data/entity/prayer/prayer_response.dart';
@@ -30,6 +31,13 @@ class HomeController extends GetxController {
 
   void toDoaList() {
     Get.toNamed(Routes.DOA_LIST);
+  }
+
+  void toPrayer() {
+    Get.toNamed(Routes.PRAYER, arguments: {
+      'prayerTimes': prayerTime,
+      'userPosition': userPosition,
+    });
   }
 
   Future<bool> checkLocationPermission() async {
@@ -117,22 +125,22 @@ class HomeController extends GetxController {
         prayerTitle = 'Subuh';
         prayerDesc = timings.fajr ?? '-';
       } else if (now.isAfter(sunrise) && now.isBefore(dhuhr)) {
-        prayerTitle = 'Jadwal Sholat';
+        prayerTitle = PrayerEnum.init.title;
         prayerDesc = '';
       } else if (now.isAfter(dhuhr) && now.isBefore(asr)) {
-        prayerTitle = 'Dzuhur';
+        prayerTitle = PrayerEnum.dzuhur.title;
         prayerDesc = timings.asr ?? '-';
       } else if (now.isAfter(asr) && now.isBefore(sunset)) {
-        prayerTitle = 'Ashar';
+        prayerTitle = PrayerEnum.ashar.title;
         prayerDesc = timings.maghrib ?? '-';
       } else if (now.isAfter(sunset) && now.isBefore(maghrib)) {
-        prayerTitle = 'Jadwal Sholat';
+        prayerTitle = PrayerEnum.init.title;
         prayerDesc = '';
       } else if (now.isAfter(maghrib) && now.isBefore(isha)) {
-        prayerTitle = 'Magrib';
+        prayerTitle = PrayerEnum.maghrib.title;
         prayerDesc = '';
       } else {
-        prayerTitle = 'Isya';
+        prayerTitle = PrayerEnum.isya.title;
         prayerDesc = timings.fajr ?? '';
       }
     } catch (error) {
