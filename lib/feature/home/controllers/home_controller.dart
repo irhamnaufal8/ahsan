@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ahsan/common/component/alert/snackbar.dart';
 import 'package:ahsan/common/enum/prayer.dart';
+import 'package:ahsan/common/extension/optional_default.dart';
 import 'package:ahsan/common/router/app_page.dart';
 import 'package:ahsan/data/entity/prayer/prayer_request.dart';
 import 'package:ahsan/data/entity/prayer/prayer_response.dart';
@@ -122,26 +123,26 @@ class HomeController extends GetxController {
       final DateTime isha = dateFormat.parse('$nowDate ${timings.isha}');
 
       if (now.isAfter(fajr) && now.isBefore(sunrise)) {
-        prayerTitle = 'Subuh';
-        prayerDesc = timings.fajr ?? '-';
+        prayerTitle = PrayerEnum.subuh.title;
+        prayerDesc = timings.fajr.orEmpty();
       } else if (now.isAfter(sunrise) && now.isBefore(dhuhr)) {
         prayerTitle = PrayerEnum.init.title;
         prayerDesc = '';
       } else if (now.isAfter(dhuhr) && now.isBefore(asr)) {
         prayerTitle = PrayerEnum.dzuhur.title;
-        prayerDesc = timings.asr ?? '-';
+        prayerDesc = timings.asr.orEmpty();
       } else if (now.isAfter(asr) && now.isBefore(sunset)) {
         prayerTitle = PrayerEnum.ashar.title;
-        prayerDesc = timings.maghrib ?? '-';
+        prayerDesc = timings.maghrib.orEmpty();
       } else if (now.isAfter(sunset) && now.isBefore(maghrib)) {
         prayerTitle = PrayerEnum.init.title;
         prayerDesc = '';
       } else if (now.isAfter(maghrib) && now.isBefore(isha)) {
         prayerTitle = PrayerEnum.maghrib.title;
-        prayerDesc = '';
+        prayerDesc = timings.isha.orEmpty();
       } else {
         prayerTitle = PrayerEnum.isya.title;
-        prayerDesc = timings.fajr ?? '';
+        prayerDesc = timings.fajr.orEmpty();
       }
     } catch (error) {
       debugPrint('Error: $error');

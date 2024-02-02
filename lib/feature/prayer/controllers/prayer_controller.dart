@@ -5,10 +5,12 @@ import 'package:ahsan/common/enum/prayer.dart';
 import 'package:ahsan/data/entity/prayer/prayer_request.dart';
 import 'package:ahsan/data/entity/prayer/prayer_response.dart';
 import 'package:ahsan/data/reusable/reusable_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class PrayerController extends GetxController {
   PrayerTimingResponse? prayerTimes = Get.arguments['prayerTimes'];
@@ -24,6 +26,14 @@ class PrayerController extends GetxController {
     updateLocationText();
   }
 
+  @override
+  void onReady() {
+    super.onReady();
+    if (prayerTimes != null) {
+      updateCurrentPrayer(prayerTimes!);
+    }
+  }
+
   Future<void> updateLocationText() async {
     if (userPosition == null) return;
     try {
@@ -37,6 +47,41 @@ class PrayerController extends GetxController {
     } catch (error) {
       showSnackbar(error.toString(), type: SnackBarType.error);
     }
+  }
+
+  Future<void> updateCurrentPrayer(PrayerTimingResponse timings) async {
+    try {
+      final DateTime now = DateTime.now();
+      var nowDate = '${now.year}-${now.month}-${now.day}';
+      var dateFormat = DateFormat("yyyy-MM-dd HH:mm");
+      final DateTime fajr = dateFormat.parse('$nowDate ${timings.fajr}');
+      final DateTime sunrise = dateFormat.parse('$nowDate ${timings.sunrise}');
+      final DateTime dhuhr = dateFormat.parse('$nowDate ${timings.dhuhr}');
+      final DateTime asr = dateFormat.parse('$nowDate ${timings.asr}');
+      final DateTime sunset = dateFormat.parse('$nowDate ${timings.sunset}');
+      final DateTime maghrib = dateFormat.parse('$nowDate ${timings.maghrib}');
+      final DateTime isha = dateFormat.parse('$nowDate ${timings.isha}');
+
+      if (now.isAfter(fajr) && now.isBefore(sunrise)) {
+        currentPrayer = PrayerEnum.subuh;
+      } else if (now.isAfter(sunrise) && now.isBefore(dhuhr)) {
+        currentPrayer = PrayerEnum.init;
+      } else if (now.isAfter(dhuhr) && now.isBefore(asr)) {
+        currentPrayer = PrayerEnum.dzuhur;
+      } else if (now.isAfter(asr) && now.isBefore(sunset)) {
+        currentPrayer = PrayerEnum.ashar;
+      } else if (now.isAfter(sunset) && now.isBefore(maghrib)) {
+        currentPrayer = PrayerEnum.init;
+      } else if (now.isAfter(maghrib) && now.isBefore(isha)) {
+        currentPrayer = PrayerEnum.maghrib;
+      } else {
+        currentPrayer = PrayerEnum.isya;
+      }
+    } catch (error) {
+      debugPrint('Error: $error');
+    }
+
+    update();
   }
 
   Future<bool> checkLocationPermission() async {
@@ -98,6 +143,7 @@ class PrayerController extends GetxController {
           return PrayerTimingDataResponse.fromJson(json);
         });
         prayerTimes = (result.data ?? PrayerTimingDataResponse()).timings;
+        updateCurrentPrayer(prayerTimes!);
       } else {
         showSnackbar('Gagal mendapatkan waktu sholat');
       }
