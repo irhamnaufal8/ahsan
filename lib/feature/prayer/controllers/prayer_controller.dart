@@ -18,6 +18,7 @@ class PrayerController extends GetxController {
   PrayerEnum currentPrayer = PrayerEnum.init;
   bool isLoading = true;
   String locationText = '-';
+  DateTime pickedDate = DateTime.now().obs.value;
 
   @override
   void onInit() {
@@ -50,35 +51,43 @@ class PrayerController extends GetxController {
   }
 
   Future<void> updateCurrentPrayer(PrayerTimingResponse timings) async {
-    try {
-      final DateTime now = DateTime.now();
-      var nowDate = '${now.year}-${now.month}-${now.day}';
-      var dateFormat = DateFormat("yyyy-MM-dd HH:mm");
-      final DateTime fajr = dateFormat.parse('$nowDate ${timings.fajr}');
-      final DateTime sunrise = dateFormat.parse('$nowDate ${timings.sunrise}');
-      final DateTime dhuhr = dateFormat.parse('$nowDate ${timings.dhuhr}');
-      final DateTime asr = dateFormat.parse('$nowDate ${timings.asr}');
-      final DateTime sunset = dateFormat.parse('$nowDate ${timings.sunset}');
-      final DateTime maghrib = dateFormat.parse('$nowDate ${timings.maghrib}');
-      final DateTime isha = dateFormat.parse('$nowDate ${timings.isha}');
+    if (pickedDate.day == DateTime.now().day &&
+        pickedDate.month == DateTime.now().month &&
+        pickedDate.year == DateTime.now().year) {
+      try {
+        var now = DateTime.now();
+        var nowDate = '${now.year}-${now.month}-${now.day}';
+        var dateFormat = DateFormat("yyyy-MM-dd HH:mm");
+        final DateTime fajr = dateFormat.parse('$nowDate ${timings.fajr}');
+        final DateTime sunrise =
+            dateFormat.parse('$nowDate ${timings.sunrise}');
+        final DateTime dhuhr = dateFormat.parse('$nowDate ${timings.dhuhr}');
+        final DateTime asr = dateFormat.parse('$nowDate ${timings.asr}');
+        final DateTime sunset = dateFormat.parse('$nowDate ${timings.sunset}');
+        final DateTime maghrib =
+            dateFormat.parse('$nowDate ${timings.maghrib}');
+        final DateTime isha = dateFormat.parse('$nowDate ${timings.isha}');
 
-      if (now.isAfter(fajr) && now.isBefore(sunrise)) {
-        currentPrayer = PrayerEnum.subuh;
-      } else if (now.isAfter(sunrise) && now.isBefore(dhuhr)) {
-        currentPrayer = PrayerEnum.init;
-      } else if (now.isAfter(dhuhr) && now.isBefore(asr)) {
-        currentPrayer = PrayerEnum.dzuhur;
-      } else if (now.isAfter(asr) && now.isBefore(sunset)) {
-        currentPrayer = PrayerEnum.ashar;
-      } else if (now.isAfter(sunset) && now.isBefore(maghrib)) {
-        currentPrayer = PrayerEnum.init;
-      } else if (now.isAfter(maghrib) && now.isBefore(isha)) {
-        currentPrayer = PrayerEnum.maghrib;
-      } else {
-        currentPrayer = PrayerEnum.isya;
+        if (now.isAfter(fajr) && now.isBefore(sunrise)) {
+          currentPrayer = PrayerEnum.subuh;
+        } else if (now.isAfter(sunrise) && now.isBefore(dhuhr)) {
+          currentPrayer = PrayerEnum.init;
+        } else if (now.isAfter(dhuhr) && now.isBefore(asr)) {
+          currentPrayer = PrayerEnum.dzuhur;
+        } else if (now.isAfter(asr) && now.isBefore(sunset)) {
+          currentPrayer = PrayerEnum.ashar;
+        } else if (now.isAfter(sunset) && now.isBefore(maghrib)) {
+          currentPrayer = PrayerEnum.init;
+        } else if (now.isAfter(maghrib) && now.isBefore(isha)) {
+          currentPrayer = PrayerEnum.maghrib;
+        } else {
+          currentPrayer = PrayerEnum.isya;
+        }
+      } catch (error) {
+        debugPrint('Error: $error');
       }
-    } catch (error) {
-      debugPrint('Error: $error');
+    } else {
+      currentPrayer = PrayerEnum.init;
     }
 
     update();
@@ -125,8 +134,8 @@ class PrayerController extends GetxController {
     isLoading = true;
     update();
     try {
-      final DateTime now = DateTime.now();
-      final formatedDate = '${now.day}-${now.month}-${now.year}';
+      final formatedDate =
+          '${pickedDate.day}-${pickedDate.month}-${pickedDate.year}';
       final PrayerRequest param = PrayerRequest(
           latitude: position.latitude, longitude: position.longitude);
 

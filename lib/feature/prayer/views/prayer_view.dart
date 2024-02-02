@@ -44,18 +44,55 @@ class PrayerView extends GetView<PrayerController> {
                   width: double.infinity,
                   margin: const EdgeInsets.only(
                       top: 12, left: 20, right: 20, bottom: 32),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(controller.locationText,
-                            style: Poppins.bold(16, color: MonoColors.black1)),
-                        Text(
-                          DateFormat('EEEE, dd MMMM yyyy', 'id_ID')
-                              .format(DateTime.now()),
-                          style: Poppins.medium(14, color: MonoColors.black2),
-                        ),
-                      ]),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(controller.locationText,
+                                style:
+                                    Poppins.bold(16, color: MonoColors.black1)),
+                            Text(
+                              DateFormat('EEEE, dd MMMM yyyy', 'id_ID')
+                                  .format(controller.pickedDate),
+                              style:
+                                  Poppins.medium(14, color: MonoColors.black2),
+                            ),
+                          ]),
+                      IconButton(
+                          onPressed: () async {
+                            final DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: controller.pickedDate,
+                                firstDate: DateTime(2023),
+                                lastDate: DateTime(2025),
+                                builder: (BuildContext context, Widget? child) {
+                                  return Theme(
+                                    data: ThemeData.light().copyWith(
+                                      primaryColor: PrimaryColors.primary,
+                                      colorScheme: const ColorScheme.light(
+                                          primary: PrimaryColors.primary),
+                                      buttonTheme: const ButtonThemeData(
+                                          textTheme: ButtonTextTheme.primary),
+                                    ),
+                                    child: child!,
+                                  );
+                                });
+                            if (pickedDate != null &&
+                                pickedDate != controller.pickedDate) {
+                              controller.pickedDate = pickedDate;
+                              controller
+                                  .getPrayerTime(controller.userPosition!);
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.calendar_month,
+                            color: PrimaryColors.primary,
+                          ))
+                    ],
+                  ),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
